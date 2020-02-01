@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Custom/Events/Events.h"
+#include "Custom/Events/EventsHandler.h"
 #include "TilesManager.generated.h"
 
 class ATile;
@@ -31,4 +33,9 @@ protected:
 
 private:
 	TArray<int> m_InactiveTiles;
+
+	EventsHandler m_EventsHandler;
+
+	void SubcribeOnEvents();
+	void OnPlayerWonMatch(const EventData& eventData);
 };

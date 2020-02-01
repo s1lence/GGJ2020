@@ -6,6 +6,7 @@ enum class GameplayEventType
     Base,
     LeaveFromMainMenu,
 	PlayerRepairedObject,
+	PlayerObjectFullyRepaired,
 };
 
 struct EventData
@@ -43,6 +44,7 @@ struct EventDelegateHandle
 DECLARE_EVENT_OneParam(EventDispatcher, BaseGameEvent, const struct EventData&)
 DECLARE_DERIVED_EVENT(EventDispatcher, BaseGameEvent, LeaveFromMainMenuEvent)
 DECLARE_DERIVED_EVENT(EventDispatcher, BaseGameEvent, PlayerRepairedObjectEvent)
+DECLARE_DERIVED_EVENT(EventDispatcher, BaseGameEvent, PlayerObjectFullyRepairedEvent)
 
 struct LeaveFromMainMenuEventData : public EventData
 {
@@ -65,4 +67,16 @@ struct PlayerRepairedObjectEventData : public EventData
 	}
 	int Id;
 	int AmountOfDetailsBringed;
+};
+
+struct PlayerObjectFullyRepairedEventData : public EventData
+{
+	using Super = EventData;
+
+	PlayerObjectFullyRepairedEventData(int id)
+		: Super(GameplayEventType::PlayerRepairedObject)
+	{
+		Id = id;
+	}
+	int Id;
 };

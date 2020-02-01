@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/WidgetComponent.h"
 #include "Custom/Events/Events.h"
+#include "Custom/Events/EventDispatcher.h"
 #include "UI/RepairGauge/RepairGaugeWidget.h"
 
 // Sets default values
@@ -58,21 +59,28 @@ void ARepairGaugeActor::OnPlayerRepairedObject(const EventData& eventData)
 		return;
 	}
 
-	auto data = static_cast<const PlayerRepairedObjectEventData&>(eventData);
+	auto playerData = static_cast<const PlayerRepairedObjectEventData&>(eventData);
 
-	if (data.Id == 1)
+	if (playerData.Id == 1)
 	{
 		if (Player1RepairProgress < AmountOfDetailsNeeded)
 		{
-			Player1RepairProgress += data.AmountOfDetailsBringed;
+			Player1RepairProgress += playerData.AmountOfDetailsBringed;
 			widget->SetFirstPlayerGaugePercents(Player1RepairProgress / AmountOfDetailsNeeded);
 		}
+		else
+		{
+			if (BaseGameEvent* playerWonEvent = EventDispatcher::GetInstance().GetEvent(GameplayEventType::PlayerObjectFullyRepaired))
+			{
+				playerWonEvent->Broadcast(PlayerObjectFullyRepairedEventData(playerData.Id));
+			}
+		}
 	}
-	else if (data.Id == 2)
+	else if (playerData.Id == 2)
 	{
 		if (Player2RepairProgress < AmountOfDetailsNeeded)
 		{
-			Player2RepairProgress += data.AmountOfDetailsBringed;
+			Player2RepairProgress += playerData.AmountOfDetailsBringed;
 			widget->SetSecondPlayerGaugePercents(Player2RepairProgress / AmountOfDetailsNeeded);
 		}
 	}

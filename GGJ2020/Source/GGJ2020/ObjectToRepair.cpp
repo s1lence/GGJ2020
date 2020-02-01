@@ -51,10 +51,10 @@ void AObjectToRepair::BeginOverlap(UPrimitiveComponent* OverlappedComponent,
 	bool bFromSweep,
 	const FHitResult& SweepResult)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Began overlap!"));
+  	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Began overlap!"));
 	UE_LOG(LogTemp, Warning, TEXT("Began overlap!"));
 
-	if (AGameCharacter* player = static_cast<AGameCharacter*>(OtherActor))
+	if (AGameCharacter* player = Cast<AGameCharacter>(OtherActor))
 	{
 		SendRepairEvent(player->GetId(), player->TakeDetailsFromPlayersToObject()); // #TODO Pass player->TakeDetailsFromPlayersToObject as second parameter
 	}

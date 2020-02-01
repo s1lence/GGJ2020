@@ -5,6 +5,8 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/BoxComponent.h"
+#include "Custom/Events/EventDispatcher.h"
+
 
 // Sets default values
 AObjectToRepair::AObjectToRepair()
@@ -22,6 +24,8 @@ AObjectToRepair::AObjectToRepair()
 
 	BoxComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComponent"));
 	BoxComponent->AttachTo(RootComponent);
+
+	BoxComponent->SetBoxExtent(FVector(55.0f, 55.0f, 55.0f));
 
 	BoxComponent->OnComponentBeginOverlap.AddDynamic(this, &AObjectToRepair::BeginOverlap);
 }
@@ -49,4 +53,22 @@ void AObjectToRepair::BeginOverlap(UPrimitiveComponent* OverlappedComponent,
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Began overlap!"));
 	UE_LOG(LogTemp, Warning, TEXT("Began overlap!"));
+
+	if (AGameCharacter* player = static_cast<AGameCharacter*>(OtherActor))
+	{
+		SendRepairEvent(player->GetId(), 1); // #TODO Pass player->TakeDetailsFromPlayersToObject as second parameter
+	}
 }
+
+void AObjectToRepair::SendRepairEvent(int playerIndex, int amountOfItemsBringed)
+{
+	if (BaseGameEvent* repairEvent = EventDispatcher::GetInstance().GetEvent(GameplayEventType::PlayerRepairedObject))
+	{
+		repairEvent->Broadcast(PlayerRepairedObjectEventData(playerIndex, amountOfItemsBringed));
+	}
+}
+
+//void AObjectToRepair::SendRepairEvent_Implementation()
+//{
+//
+//}

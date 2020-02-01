@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Character/GameCharacter.h"
 #include "ObjectToRepair.generated.h"
 
 UCLASS()
@@ -36,4 +37,9 @@ public:
 			int32 OtherBodyIndex,
 			bool bFromSweep,
 			const FHitResult& SweepResult);
+
+	//UFUNCTION(BlueprintCallable)
+	void SendRepairEvent(int playerIndex, int amountOfItemsBringed);
+
+	//void TestSendEvent_Implementation();
 };

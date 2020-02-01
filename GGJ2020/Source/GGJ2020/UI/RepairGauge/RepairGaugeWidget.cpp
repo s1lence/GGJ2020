@@ -17,16 +17,16 @@ void URepairGaugeWidget::NativeConstruct()
 
 void URepairGaugeWidget::ResetGauges()
 {
-	ProgressBarPlayer1->Percent = 0.0f;
-	ProgressBarPlayer2->Percent = 0.0f;
+	ProgressBarPlayer1->SetPercent(0.0f);
+	ProgressBarPlayer2->SetPercent(0.0f);
 }
 
 void URepairGaugeWidget::SetFirstPlayerGaugePercents(float percents)
 {
-	ProgressBarPlayer1->Percent = percents;
+	ProgressBarPlayer1->SetPercent(percents);
 }
 
 void URepairGaugeWidget::SetSecondPlayerGaugePercents(float percents)
 {
-	ProgressBarPlayer2->Percent = percents;
+	ProgressBarPlayer2->SetPercent(percents);
 }

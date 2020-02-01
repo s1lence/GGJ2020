@@ -27,6 +27,12 @@ protected:
     void MoveForwardPlayer2(float value);
     void MoveRightPlayer2(float value);
 
+	void ShootPlayer1Pressed();
+	void ShootPlayer1Released();
+
+	void ShootPlayer2Pressed();
+	void ShootPlayer2Released();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

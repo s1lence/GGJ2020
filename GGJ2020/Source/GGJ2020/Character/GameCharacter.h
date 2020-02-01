@@ -16,9 +16,35 @@ public:
     void MoveForward(float Value);
     void MoveRight(float Value);
 
-protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
-    class UArrowComponent* m_Arrow = nullptr;
 
+	int GetId() const { return Id; };
+	void SetId(int id) { Id = id; };
+
+	void ShootActionPressed();
+	void ShootActionReleased();
+
+	virtual void Tick(float DeltaTime) override;
+
+protected:
+	
+	void Shoot();
+	void UpdateShooting(float DeltaTime);
+
+	float ProjectileSpawnDistanceMultiplier = 50.0f;
+
+	float ShootCooldown = 0.08f;
+	float ReloadTime = 3.5f;
+
+	int MaxClipSize = 30;
+	int m_currentClipSize = MaxClipSize;
+
+	float ForceAppliedToProjectile = 800000.0f;
+	float ProjectileScaleCoefficient = 0.12f;
+
+	float m_timeElapsed = 0.0f;
+	bool m_shooting = false;
+
+private:
+	int Id = 1; // #TODO Generate ID
 };
 

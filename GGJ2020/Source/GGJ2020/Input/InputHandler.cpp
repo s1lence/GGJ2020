@@ -5,21 +5,6 @@
 #include "Character/GameCharacter.h"
 #include "Kismet/GameplayStatics.h"
 
-#define GET_ACTION_NAME_STARTED(NAME) NAME##Pressed
-#define GET_ACTION_NAME_ENDED(NAME) NAME##Released
-
-#define GET_TEXT(NAME) TEXT(#NAME)
-
-#define BIND_ACTION_PRESS(NAME, HANDLER_CLASS_NAME) \
-	PlayerInputComponent->BindAction(GET_TEXT(NAME), IE_Pressed, this, &HANDLER_CLASS_NAME::GET_ACTION_NAME_STARTED(NAME))
-
-#define BIND_ACTION_RELEASE(NAME, HANDLER_CLASS_NAME) \
-	PlayerInputComponent->BindAction(GET_TEXT(NAME), IE_Released, this, &HANDLER_CLASS_NAME::GET_ACTION_NAME_ENDED(NAME))
-
-#define BIND_FULL_PRESS_ACTION(NAME, HANDLER_CLASS_NAME)	\
-	BIND_ACTION_PRESS(NAME, HANDLER_CLASS_NAME);			\
-	BIND_ACTION_RELEASE(NAME, HANDLER_CLASS_NAME)
-
 // Sets default values
 AInputHandler::AInputHandler()
 {
@@ -91,13 +76,6 @@ void AInputHandler::ShootPlayer1Pressed()
     }
 }
 
-void AInputHandler::ShootPlayer1Released()
-{
-    if (m_Player1)
-    {
-        m_Player1->ShootActionReleased();
-    }
-}
 
 void AInputHandler::ShootPlayer2Pressed()
 {
@@ -107,13 +85,6 @@ void AInputHandler::ShootPlayer2Pressed()
     }
 }
 
-void AInputHandler::ShootPlayer2Released()
-{
-    if (m_Player2)
-    {
-        m_Player2->ShootActionReleased();
-    }
-}
 
 // Called to bind functionality to input
 void AInputHandler::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -125,7 +96,7 @@ void AInputHandler::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
     PlayerInputComponent->BindAxis("MoveForwardPlayer2", this, &AInputHandler::MoveForwardPlayer2);
     PlayerInputComponent->BindAxis("MoveRightPlayer2", this, &AInputHandler::MoveRightPlayer2);
 
-    BIND_FULL_PRESS_ACTION(ShootPlayer1, AInputHandler);
-    BIND_FULL_PRESS_ACTION(ShootPlayer2, AInputHandler);
+    PlayerInputComponent->BindAction("ShootPlayer1", IE_Pressed, this, &AInputHandler::ShootPlayer1Pressed);
+    PlayerInputComponent->BindAction("ShootPlayer2", IE_Pressed, this, &AInputHandler::ShootPlayer2Pressed);
 }
 

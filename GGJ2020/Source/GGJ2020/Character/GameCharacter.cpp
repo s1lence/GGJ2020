@@ -14,6 +14,8 @@
 AGameCharacter::AGameCharacter()
 {
 	m_Arrow = CreateDefaultSubobject<UArrowComponent>(TEXT("GunArrow"));
+	FAttachmentTransformRules rules(EAttachmentRule::KeepRelative, false);
+	m_Arrow->AttachToComponent(GetCapsuleComponent(), rules);
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
 	// Don't rotate when the controller rotates. Let that just affect the camera.

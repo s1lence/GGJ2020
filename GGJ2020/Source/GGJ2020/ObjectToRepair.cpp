@@ -6,6 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/BoxComponent.h"
 #include "Custom/Events/EventDispatcher.h"
+#include "Projectile.h"
 
 
 // Sets default values
@@ -51,7 +52,13 @@ void AObjectToRepair::BeginOverlap(UPrimitiveComponent* OverlappedComponent,
 	bool bFromSweep,
 	const FHitResult& SweepResult)
 {
-  	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Began overlap!"));
+	if (AProjectile* projectile = Cast<AProjectile>(OtherActor))
+	{
+		projectile->Destroy();
+		return;
+	}
+	
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Began overlap!"));
 	UE_LOG(LogTemp, Warning, TEXT("Began overlap!"));
 
 	if (AGameCharacter* player = Cast<AGameCharacter>(OtherActor))

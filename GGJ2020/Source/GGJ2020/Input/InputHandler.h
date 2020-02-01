@@ -6,7 +6,7 @@
 #include "GameFramework/Pawn.h"
 #include "InputHandler.generated.h"
 
-class AGameCharacter;
+class ABasicCharacter;
 
 UCLASS()
 class GGJ2020_API AInputHandler : public APawn
@@ -39,7 +39,7 @@ public:
 
 protected:
 	UPROPERTY(BlueprintReadOnly)
-	AGameCharacter* m_Player1 = nullptr;
+	ABasicCharacter* m_Player1 = nullptr;
 	UPROPERTY(BlueprintReadOnly)
-	AGameCharacter* m_Player2 = nullptr;
+	ABasicCharacter* m_Player2 = nullptr;
 };

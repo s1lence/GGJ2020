@@ -17,7 +17,6 @@ AProjectile::AProjectile()
 		MeshBody = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ProjectileBody"));
 		MeshBody->SetStaticMesh(MeshAsset.Object);
 
-		MeshBody->SetSimulatePhysics(true);
 		RootComponent = MeshBody;
 	}
 }

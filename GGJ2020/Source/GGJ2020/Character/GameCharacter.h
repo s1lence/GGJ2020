@@ -23,6 +23,8 @@ public:
 	void ShootActionPressed();
 	void ShootActionReleased();
 
+	int TakeDetailsFromPlayersToObject();
+
 	virtual void Tick(float DeltaTime) override;
 
 protected:

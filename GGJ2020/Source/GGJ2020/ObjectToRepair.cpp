@@ -56,7 +56,7 @@ void AObjectToRepair::BeginOverlap(UPrimitiveComponent* OverlappedComponent,
 
 	if (AGameCharacter* player = Cast<AGameCharacter>(OtherActor))
 	{
-		SendRepairEvent(player->GetId(), 1); // #TODO Pass player->TakeDetailsFromPlayersToObject as second parameter
+		SendRepairEvent(player->GetId(), player->TakeDetailsFromPlayersToObject()); // #TODO Pass player->TakeDetailsFromPlayersToObject as second parameter
 	}
 }
 

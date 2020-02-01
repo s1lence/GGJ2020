@@ -22,10 +22,10 @@ private:
 
 protected:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	class UProgressBar* ProgressBarPlayer1;
+		class UProgressBar* ProgressBarPlayer1;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	class UProgressBar* ProgressBarPlayer2;
+		class UProgressBar* ProgressBarPlayer2;
 public:
 	void ResetGauges();
 

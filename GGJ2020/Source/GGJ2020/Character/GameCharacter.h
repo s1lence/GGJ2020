@@ -45,6 +45,6 @@ protected:
 	bool m_shooting = false;
 
 private:
-	int Id = 1; // #TODO Generate ID
+	int Id = 0; // #TODO Generate ID
 };
 

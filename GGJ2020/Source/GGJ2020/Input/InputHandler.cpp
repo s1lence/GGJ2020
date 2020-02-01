@@ -38,7 +38,9 @@ void AInputHandler::BeginPlay()
     if (FoundCharacters.Num() == 2)
     {
 	    m_Player1 = Cast<AGameCharacter>(FoundCharacters[0]);
+		m_Player1->SetId(1);
 	    m_Player2 = Cast<AGameCharacter>(FoundCharacters[1]);
+		m_Player1->SetId(2);
     }
 }
 

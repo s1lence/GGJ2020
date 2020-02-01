@@ -19,7 +19,7 @@ public:
 	int GetId() const { return Id; };
 	void SetId(int id) { Id = id; };
 
-	void ShootActionPressed(const FVector& direction);
+	void ShootActionPressed();
 
 	int TakeDetailsFromPlayersToObject();
 
@@ -29,7 +29,7 @@ public:
     void OnHit(UPrimitiveComponent* MyComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 protected:
 	
-	void Shoot(const FVector& direction);
+	void Shoot();
 
 	float ProjectileSpawnDistanceMultiplier = 50.0f;
 

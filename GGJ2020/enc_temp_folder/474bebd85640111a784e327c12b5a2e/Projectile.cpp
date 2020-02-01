@@ -22,17 +22,22 @@ AProjectile::AProjectile()
 	}
 }
 
+// Called when the game starts or when spawned
+void AProjectile::BeginPlay()
+{
+	Super::BeginPlay();
+
+}
+
 // Called every frame
 void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	const FVector nextLocation = GetActorLocation() + moveDirection * moveSpeed * DeltaTime;
-	SetActorLocation(nextLocation);
 }
 
-void AProjectile::SetMoveDirection(const FVector& direction)
+void AProjectile::AddForce(FVector const &force)
 {
-	moveDirection = direction;
+	MeshBody->AddForce(force, NAME_None, true);
 }
 

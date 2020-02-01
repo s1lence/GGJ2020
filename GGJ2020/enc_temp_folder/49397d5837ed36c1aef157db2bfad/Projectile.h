@@ -15,19 +15,19 @@ public:
 	// Sets default values for this actor's properties
 	AProjectile();
 
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	void SetMoveDirection(const FVector& direction);
+
+	void AddForce(FVector const &force);
 
 protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Projectile")
 	class UStaticMeshComponent *MeshBody;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector moveDirection{ 1.f, 0.f, 0.f };
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float moveSpeed = 10.f;
 
 };

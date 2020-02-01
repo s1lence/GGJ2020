@@ -60,13 +60,11 @@ void AGameCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AGameCharacter::ShootActionPressed(const FVector& direction)
+void AGameCharacter::ShootActionPressed()
 {
 	if (!m_IsCooldown)
 	{
-		FVector shootDirection(direction.X, direction.Y, 0.f);
-		shootDirection.Normalize();
-		Shoot(shootDirection);
+		Shoot();
 		m_IsCooldown = true;
 	}
 
@@ -84,12 +82,13 @@ void AGameCharacter::ResetCooldown()
 	m_IsCooldown = false;
 }
 
-void AGameCharacter::Shoot(const FVector& direction)
-{
+void AGameCharacter::Shoot()																										
+{												
 	UWorld *world = GetWorld();
-	FVector const spawnLocation = GetCapsuleComponent()->GetComponentLocation() + direction * ProjectileSpawnDistanceMultiplier;
+	FVector const AimDirection = GetCapsuleComponent()->GetForwardVector();
+	FVector const spawnLocation = GetCapsuleComponent()->GetComponentLocation() + AimDirection * ProjectileSpawnDistanceMultiplier;
 
 	AProjectile* bullet = GetWorld()->SpawnActor<AProjectile>(spawnLocation, GetCapsuleComponent()->GetComponentRotation());
-	bullet->SetMoveDirection(direction);
+	bullet->AddForce(ForceAppliedToProjectile * AimDirection);
 	bullet->SetActorScale3D(FVector(ProjectileScaleCoefficient));
 }

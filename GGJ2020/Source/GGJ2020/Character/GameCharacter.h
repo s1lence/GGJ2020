@@ -16,9 +16,29 @@ public:
     void MoveForward(float Value);
     void MoveRight(float Value);
 
+	void ShootActionPressed();
+	void ShootActionReleased();
+
+	virtual void Tick(float DeltaTime) override;
+
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
-    class UArrowComponent* m_Arrow = nullptr;
+	
+	void Shoot();
+	void UpdateShooting(float DeltaTime);
+
+	float ProjectileSpawnDistanceMultiplier = 50.0f;
+
+	float ShootCooldown = 0.08f;
+	float ReloadTime = 3.5f;
+
+	int MaxClipSize = 30;
+	int m_currentClipSize = MaxClipSize;
+
+	float ForceAppliedToProjectile = 800000.0f;
+	float ProjectileScaleCoefficient = 0.12f;
+
+	float m_timeElapsed = 0.0f;
+	bool m_shooting = false;
 
 };
 

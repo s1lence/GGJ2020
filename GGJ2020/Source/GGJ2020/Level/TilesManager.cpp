@@ -26,8 +26,9 @@ void ATilesManager::BeginPlay()
     {
         int id = FMath::RandRange(0, 399);
 
-        m_Tiles[id]->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-        m_Tiles[id]->GetMesh()->SetVisibility(false);
+		// Temporally commented to test smooth mesh transform
+        //m_Tiles[id]->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        //m_Tiles[id]->GetMesh()->SetVisibility(false);
         m_InactiveTiles.Add(id);
     }
 }
@@ -37,6 +38,14 @@ void ATilesManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	for (int32 tileIndex : m_InactiveTiles)
+	{
+		if (!m_Tiles[tileIndex])
+		{
+			return;
+		}
+		m_Tiles[tileIndex]->GetMesh()->AddRelativeLocation(FVector(0.0f, 0.0f, -1 * DeltaTime * FallingSpeed));
+	}
 }
 
 void ATilesManager::SubcribeOnEvents()
@@ -70,7 +79,19 @@ void ATilesManager::OnPlayerWonMatch(const EventData& eventData)
 
 	for (ATile* tile : m_Tiles)
 	{
-		tile->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		tile->GetMesh()->SetVisibility(false);
+		//tile->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		//tile->GetMesh()->SetVisibility(false);
+		m_InactiveTiles.Reserve(399);
+		for (int id = 0; id < m_InactiveTiles.Num(); ++id)
+		{
+			if (!m_Tiles[id])
+			{
+				return;
+			}
+			// Temporally commented to test smooth mesh transform
+			//m_Tiles[id]->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			//m_Tiles[id]->GetMesh()->SetVisibility(false);
+			m_InactiveTiles.Add(id);
+		}
 	}
 }

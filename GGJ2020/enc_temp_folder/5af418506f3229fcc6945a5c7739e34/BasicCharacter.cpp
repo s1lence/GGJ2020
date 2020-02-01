@@ -33,11 +33,9 @@ void ABasicCharacter::BeginPlay()
 	
 }
 
-void ABasicCharacter::Shoot(const FVector& direction)
+void ABasicCharacter::Shoot()
 {
-    FVector normalizedDirection = direction;
-    normalizedDirection.Normalize();
-    OnShoot(normalizedDirection);
+    OnShoot();
 }
 
 void ABasicCharacter::MoveForward(float Value)

@@ -74,7 +74,7 @@ void AInputHandler::ShootPlayer1Pressed()
     if (m_Player1)
     {
         const FVector shootDirection = m_Player2->GetActorLocation() - m_Player1->GetActorLocation();
-        m_Player1->Shoot(shootDirection);
+        /*m_Player1->ShootActionPressed(shootDirection);*/
     }
 }
 
@@ -84,7 +84,7 @@ void AInputHandler::ShootPlayer2Pressed()
     if (m_Player2)
     {
 		const FVector shootDirection = m_Player1->GetActorLocation() - m_Player2->GetActorLocation();
-        m_Player2->Shoot(shootDirection);
+        /*m_Player2->ShootActionPressed(shootDirection);*/
     }
 }
 

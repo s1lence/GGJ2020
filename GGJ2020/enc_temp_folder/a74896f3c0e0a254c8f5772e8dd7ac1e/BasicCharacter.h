@@ -21,14 +21,14 @@ public:
     void MoveForward(float Value);
     void MoveRight(float Value);
 
-	void Shoot(const FVector& direction);
+	void Shoot();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void OnShoot(const FVector& direction);
+	void OnShoot();
 
 public:	
 	// Called every frame

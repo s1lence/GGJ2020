@@ -18,8 +18,6 @@ public:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	UFUNCTION(BlueprintCallable)
 	void SetMoveDirection(const FVector& direction);
 
 protected:

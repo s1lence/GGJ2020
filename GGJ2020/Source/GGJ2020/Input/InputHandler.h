@@ -27,6 +27,12 @@ protected:
     void MoveForwardPlayer2(float value);
     void MoveRightPlayer2(float value);
 
+	void ShootPlayer1Pressed();
+	void ShootPlayer1Released();
+
+	void ShootPlayer2Pressed();
+	void ShootPlayer2Released();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -34,8 +40,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-private:
-	UPROPERTY()
+protected:
+	UPROPERTY(BlueprintReadOnly)
 	AGameCharacter* m_Player1 = nullptr;
+	UPROPERTY(BlueprintReadOnly)
 	AGameCharacter* m_Player2 = nullptr;
 };

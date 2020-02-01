@@ -29,4 +29,12 @@ protected:
 	UPROPERTY(BlueprintReadWrite)
 	TArray<ATile*> m_Tiles;
 
+private:
+	UFUNCTION()
+	void OnTimerElapsed();
+
+private:
+	FTimerHandle m_Timer;
+
+	TArray<int> m_FallenTilesPositions;
 };

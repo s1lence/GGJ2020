@@ -9,7 +9,7 @@
 ATile::ATile()
 {
 	PrimaryActorTick.bCanEverTick = false;
-    ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/Engine/BasicShapes/Cube"));
+    ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/Engine/EngineMeshes/Cube"));
     if (MeshAsset.Succeeded())
     {
         m_Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PlaneMesh"));

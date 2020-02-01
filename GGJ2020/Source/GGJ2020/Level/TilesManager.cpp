@@ -18,7 +18,17 @@ ATilesManager::ATilesManager()
 void ATilesManager::BeginPlay()
 {
 	Super::BeginPlay();
-	GetWorld()->GetTimerManager().SetTimer(m_Timer, this, &ATilesManager::OnTimerElapsed, 5.0f, true);
+
+    
+    m_InactiveTiles.Reserve(30);
+    for (int i = 0; i < 30; ++i)
+    {
+        int id = FMath::RandRange(0, 399);
+
+        m_Tiles[id]->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        m_Tiles[id]->GetMesh()->SetVisibility(false);
+        m_InactiveTiles.Add(id);
+    }
 }
 
 // Called every frame
@@ -27,27 +37,3 @@ void ATilesManager::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
-
-void ATilesManager::OnTimerElapsed()
-{
-	if (m_FallenTilesPositions.Num() > 0)
-	{
-		for (int a : m_FallenTilesPositions)
-		{
-            m_Tiles[a]->GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-            m_Tiles[a]->GetMesh()->SetVisibility(true);
-		}
-		
-		m_FallenTilesPositions.Empty();
-	}
-	
-	for (int i = 0; i < 70; ++i)
-	{
-		int id = FMath::RandRange(0, 899);
-
-		m_Tiles[id]->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		m_Tiles[id]->GetMesh()->SetVisibility(false);
-		m_FallenTilesPositions.Add(id);
-	}
-}
-

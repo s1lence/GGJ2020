@@ -76,9 +76,5 @@ void ARepairGaugeActor::OnPlayerRepairedObject(const EventData& eventData)
 			widget->SetSecondPlayerGaugePercents(Player2RepairProgress / AmountOfDetailsNeeded);
 		}
 	}
-	else
-	{
-		check(false && "Player id is not 1 nor 2");
-	}
 }
 

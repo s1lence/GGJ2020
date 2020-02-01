@@ -16,5 +16,9 @@ public:
     void MoveForward(float Value);
     void MoveRight(float Value);
 
+protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    class UArrowComponent* m_Arrow = nullptr;
+
 };
 

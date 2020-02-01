@@ -3,6 +3,7 @@
 
 void EventDispatcher::Init()
 {
+	m_Events.insert({ GameplayEventType::PlayerRepairedObject, std::make_unique<PlayerRepairedObjectEvent>() });
     m_Events.insert({ GameplayEventType::LeaveFromMainMenu, std::make_unique<LeaveFromMainMenuEvent>() });
 }
 

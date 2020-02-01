@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Custom/Events/EventsHandler.h"
+#include "Custom/Events/Events.h"
 #include "RepairGaugeActor.generated.h"
 
 UCLASS()
@@ -25,5 +27,17 @@ public:
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GaugeWidget")
-	class UWidgetComponent* GaugeWidget;
+	class UWidgetComponent* GaugeWidgetComponent;
+
+private:
+	void SubcribeOnEvents();
+
+	void OnPlayerRepairedObject(const EventData& eventData);
+private:
+	EventsHandler m_EventsHandler;
+
+	float Player1RepairProgress = 0.0f;
+	float Player2RepairProgress = 0.0f;
+
+	int AmountOfDetailsNeeded = 5;
 };

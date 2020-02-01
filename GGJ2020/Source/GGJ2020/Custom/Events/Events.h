@@ -74,7 +74,7 @@ struct PlayerObjectFullyRepairedEventData : public EventData
 	using Super = EventData;
 
 	PlayerObjectFullyRepairedEventData(int id)
-		: Super(GameplayEventType::PlayerRepairedObject)
+		: Super(GameplayEventType::PlayerObjectFullyRepaired)
 	{
 		Id = id;
 	}

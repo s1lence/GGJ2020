@@ -88,6 +88,11 @@ void AGameCharacter::ShootActionReleased()
 	m_shooting = false;
 }
 
+int AGameCharacter::TakeDetailsFromPlayersToObject()
+{
+	return 1; // #TODO pop all items from resources inventory
+}
+
 void AGameCharacter::UpdateShooting(float DeltaTime)
 {
 	m_timeElapsed += DeltaTime;

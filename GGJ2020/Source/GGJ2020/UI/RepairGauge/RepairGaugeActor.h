@@ -34,10 +34,17 @@ private:
 
 	void OnPlayerRepairedObject(const EventData& eventData);
 private:
+	void OnPlayer1TimePassed();
+	void OnPlayer2TimePassed();
+
 	EventsHandler m_EventsHandler;
 
 	float Player1RepairProgress = 0.0f;
 	float Player2RepairProgress = 0.0f;
 
 	int AmountOfDetailsNeeded = 5;
+
+	FTimerHandle Player1TimerHandle;
+	FTimerHandle Player2TimerHandle;
+	float TimeToReduceRepairProgress = 5.0f;
 };

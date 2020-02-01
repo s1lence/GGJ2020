@@ -76,5 +76,27 @@ void ARepairGaugeActor::OnPlayerRepairedObject(const EventData& eventData)
 			widget->SetSecondPlayerGaugePercents(Player2RepairProgress / AmountOfDetailsNeeded);
 		}
 	}
+	else
+	{
+		check(false && "Player id is not 1 nor 2");
+	}
+
+	GetWorld()->GetTimerManager().SetTimer(Player1TimerHandle, this, &ARepairGaugeActor::OnPlayer1TimePassed, TimeToReduceRepairProgress, false);
+	GetWorld()->GetTimerManager().SetTimer(Player2TimerHandle, this, &ARepairGaugeActor::OnPlayer2TimePassed, TimeToReduceRepairProgress, false);
 }
 
+void ARepairGaugeActor::OnPlayer1TimePassed()
+{
+	if (Player1RepairProgress > 0)
+	{
+		Player1RepairProgress--;
+	}
+}
+
+void ARepairGaugeActor::OnPlayer2TimePassed()
+{
+	if (Player2RepairProgress > 0)
+	{
+		Player2RepairProgress--;
+	}
+}

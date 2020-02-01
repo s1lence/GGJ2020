@@ -22,6 +22,8 @@ ABasicCharacter::ABasicCharacter()
     m_Arrow->AttachToComponent(RootComponent, rules);
 
     m_Mesh->SetSimulatePhysics(true);
+    m_Mesh->BodyInstance.bLockXRotation = true;
+    m_Mesh->BodyInstance.bLockYRotation = true;
 }
 
 // Called when the game starts or when spawned

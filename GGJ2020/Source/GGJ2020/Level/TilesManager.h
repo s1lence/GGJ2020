@@ -31,6 +31,10 @@ protected:
 	UPROPERTY(BlueprintReadWrite)
 	TArray<ATile*> m_Tiles;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float FallingSpeed = 30.0f;
+
+
 private:
 	TArray<int> m_InactiveTiles;
 
@@ -38,4 +42,5 @@ private:
 
 	void SubcribeOnEvents();
 	void OnPlayerWonMatch(const EventData& eventData);
+
 };

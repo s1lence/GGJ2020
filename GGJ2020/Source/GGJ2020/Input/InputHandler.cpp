@@ -3,6 +3,7 @@
 
 #include "InputHandler.h"
 #include "Character/GameCharacter.h"
+#include "BasicCharacter.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -19,12 +20,12 @@ void AInputHandler::BeginPlay()
 	Super::BeginPlay();
 
     TArray<AActor*> FoundCharacters;
-    UGameplayStatics::GetAllActorsOfClass(GetWorld(), AGameCharacter::StaticClass(), FoundCharacters);
+    UGameplayStatics::GetAllActorsOfClass(GetWorld(), ABasicCharacter::StaticClass(), FoundCharacters);
     if (FoundCharacters.Num() == 2)
     {
-	    m_Player1 = Cast<AGameCharacter>(FoundCharacters[0]);
+	    m_Player1 = Cast<ABasicCharacter>(FoundCharacters[0]);
 		m_Player1->SetId(1);
-	    m_Player2 = Cast<AGameCharacter>(FoundCharacters[1]);
+	    m_Player2 = Cast<ABasicCharacter>(FoundCharacters[1]);
 		m_Player2->SetId(2);
     }
 }
@@ -73,7 +74,7 @@ void AInputHandler::ShootPlayer1Pressed()
     if (m_Player1)
     {
         const FVector shootDirection = m_Player2->GetActorLocation() - m_Player1->GetActorLocation();
-        m_Player1->ShootActionPressed(shootDirection);
+        /*m_Player1->ShootActionPressed(shootDirection);*/
     }
 }
 
@@ -83,7 +84,7 @@ void AInputHandler::ShootPlayer2Pressed()
     if (m_Player2)
     {
 		const FVector shootDirection = m_Player1->GetActorLocation() - m_Player2->GetActorLocation();
-        m_Player2->ShootActionPressed(shootDirection);
+        /*m_Player2->ShootActionPressed(shootDirection);*/
     }
 }
 

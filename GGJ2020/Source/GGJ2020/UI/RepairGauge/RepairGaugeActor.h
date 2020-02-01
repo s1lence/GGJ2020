@@ -29,12 +29,17 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GaugeWidget")
 	class UWidgetComponent* GaugeWidgetComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float TimeToReduceRepairProgress = 5.0f;
+
 private:
 	void SubcribeOnEvents();
 
 	void OnPlayerRepairedObject(const EventData& eventData);
 private:
+	UFUNCTION()
 	void OnPlayer1TimePassed();
+	UFUNCTION()
 	void OnPlayer2TimePassed();
 
 	EventsHandler m_EventsHandler;
@@ -42,9 +47,9 @@ private:
 	float Player1RepairProgress = 0.0f;
 	float Player2RepairProgress = 0.0f;
 
-	int AmountOfDetailsNeeded = 5;
+	//UPROPERTY()
+	float AmountOfDetailsNeeded = 5.0f;
 
 	FTimerHandle Player1TimerHandle;
 	FTimerHandle Player2TimerHandle;
-	float TimeToReduceRepairProgress = 5.0f;
 };
